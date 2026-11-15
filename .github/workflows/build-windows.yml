@@ -1,0 +1,34 @@
+name: Build LiquidCast for Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    name: Build Windows EXE
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore and build
+        run: dotnet restore LiquidCast.csproj
+        working-directory: .
+
+      - name: Publish self-contained Windows app
+        run: dotnet publish LiquidCast.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LiquidCast-Windows-x64
+          path: publish/LiquidCast.exe
+          if-no-files-found: error
