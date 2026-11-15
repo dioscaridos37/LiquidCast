@@ -1,0 +1,94 @@
+<Window x:Class="LiquidCast.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LiquidCast" Width="1440" Height="900" MinWidth="1100" MinHeight="700"
+        WindowStartupLocation="CenterScreen" Background="#090A12" Foreground="White">
+  <Window.Resources>
+    <Style x:Key="GlassCard" TargetType="Border">
+      <Setter Property="Background" Value="{StaticResource GlassBrush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource StrokeBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="18"/>
+      <Setter Property="Padding" Value="16"/>
+    </Style>
+    <Style x:Key="SectionTitle" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+      <Setter Property="Margin" Value="0,0,0,10"/>
+    </Style>
+  </Window.Resources>
+
+  <Grid>
+    <Grid.Background>
+      <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#101326" Offset="0"/><GradientStop Color="#211634" Offset=".52"/><GradientStop Color="#080910" Offset="1"/>
+      </LinearGradientBrush>
+    </Grid.Background>
+    <Ellipse Width="500" Height="500" Fill="#352C7C" Opacity=".28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-180,-180,0,0"/>
+    <Ellipse Width="420" Height="420" Fill="#592B86" Opacity=".22" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-130,-130"/>
+
+    <Grid Margin="28">
+      <Grid.RowDefinitions><RowDefinition Height="58"/><RowDefinition Height="*"/><RowDefinition Height="104"/></Grid.RowDefinitions>
+      <DockPanel Grid.Row="0">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+          <TextBlock Text="LiquidCast" FontSize="26" FontWeight="Bold" VerticalAlignment="Center"/>
+          <TextBlock Text="  СТРИМ-СТУДИЯ" Foreground="{StaticResource MutedBrush}" FontSize="11" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+          <Border Style="{StaticResource GlassCard}" Padding="12,6" CornerRadius="16"><TextBlock Text="●  Не в эфире" Foreground="#91A0B9"/></Border>
+          <Button Content="⚙ Настройки" Click="Settings_Click"/>
+        </StackPanel>
+      </DockPanel>
+
+      <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="190"/><ColumnDefinition Width="*"/><ColumnDefinition Width="310"/></Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Style="{StaticResource GlassCard}" Margin="0,0,12,0">
+          <DockPanel>
+            <TextBlock Text="СЦЕНЫ" Style="{StaticResource SectionTitle}" DockPanel.Dock="Top"/>
+            <StackPanel x:Name="ScenesPanel">
+              <Button Content="◉  Основная" Tag="Основная" Click="Scene_Click" HorizontalContentAlignment="Left"/>
+              <Button Content="▣  Игра" Tag="Игра" Click="Scene_Click" HorizontalContentAlignment="Left"/>
+              <Button Content="◌  Камера" Tag="Камера" Click="Scene_Click" HorizontalContentAlignment="Left"/>
+              <Button Content="◫  BRB" Tag="BRB" Click="Scene_Click" HorizontalContentAlignment="Left"/>
+            </StackPanel>
+            <Button Content="＋  Новая сцена" DockPanel.Dock="Bottom" Click="NewScene_Click"/>
+          </DockPanel>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="0,0,12,0">
+          <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="170"/></Grid.RowDefinitions>
+          <Border Grid.Row="0" Style="{StaticResource GlassCard}" Padding="0" Background="#16000000">
+            <Grid>
+              <Grid.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#191C34"/><GradientStop Color="#0A0B13" Offset="1"/></LinearGradientBrush></Grid.Background>
+              <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="ПРЕДПРОСМОТР" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Center" FontSize="12"/><TextBlock Text="Добавьте источник" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,12,0,0"/><TextBlock Text="Экран  ·  Окно  ·  Камера" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Center" Margin="0,6,0,0"/></StackPanel>
+              <Border Background="#50000000" CornerRadius="0,0,18,0" Padding="12,6" HorizontalAlignment="Left" VerticalAlignment="Top"><TextBlock Text="LIVE PREVIEW" FontSize="10" Foreground="#AAB4D0"/></Border>
+            </Grid>
+          </Border>
+          <Border Grid.Row="1" Style="{StaticResource GlassCard}" Margin="0,12,0,0">
+            <DockPanel><TextBlock Text="ИСТОЧНИКИ" Style="{StaticResource SectionTitle}" DockPanel.Dock="Top"/>
+              <WrapPanel x:Name="SourcesPanel"><Button Content="▣  Экран" Click="Source_Click"/><Button Content="▤  Окно" Click="Source_Click"/><Button Content="◉  Камера" Click="Source_Click"/><Button Content="Т  Текст" Click="Source_Click"/><Button Content="▧  Изображение" Click="Source_Click"/><Button Content="＋" Click="Source_Click"/></WrapPanel>
+            </DockPanel>
+          </Border>
+        </Grid>
+
+        <Grid Grid.Column="2">
+          <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="240"/></Grid.RowDefinitions>
+          <Border Grid.Row="0" Style="{StaticResource GlassCard}">
+            <DockPanel><StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,0,0,12"><TextBlock Text="ЧАТ" FontSize="13" FontWeight="SemiBold"/><Button Content="Twitch" Margin="65,0,0,0"/><Button Content="YouTube"/></StackPanel><TextBlock Text="Чат появится после подключения канала" TextWrapping="Wrap" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/></DockPanel>
+          </Border>
+          <Border Grid.Row="1" Style="{StaticResource GlassCard}" Margin="0,12,0,0"><StackPanel><TextBlock Text="СВОЙСТВА" Style="{StaticResource SectionTitle}"/><TextBlock Text="Выберите источник или сцену" Foreground="{StaticResource MutedBrush}"/><Separator Margin="0,18"/><TextBlock Text="ПРОФИЛЬ" Style="{StaticResource SectionTitle}"/><ComboBox SelectedIndex="0"><ComboBoxItem>Игровой эфир</ComboBoxItem><ComboBoxItem>Разговорный эфир</ComboBoxItem></ComboBox></StackPanel></Border>
+        </Grid>
+      </Grid>
+
+      <Border Grid.Row="2" Style="{StaticResource GlassCard}" Margin="0,12,0,0" Padding="12">
+        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <StackPanel Orientation="Horizontal"><Button Content="▶ Начать эфир" Background="#B92B6BFF" Padding="22,12" Click="StartStream_Click"/><Button Content="● Запись" Click="Record_Click"/><Button Content="🎙 Микрофон" Click="Mute_Click"/></StackPanel>
+          <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="Микрофон" Foreground="{StaticResource MutedBrush}"/><Slider Width="130" Value="75" Margin="10,0,22,0"/><TextBlock Text="Системный звук" Foreground="{StaticResource MutedBrush}"/><Slider Width="130" Value="60" Margin="10,0,0,0"/></StackPanel>
+          <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center"><TextBlock Text="FPS 60  •  0 kb/s  •  0 dropped" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center"/><Button Content="⚡ Автонастройка" Click="AutoTune_Click"/></StackPanel>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>

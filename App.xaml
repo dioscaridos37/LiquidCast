@@ -1,0 +1,29 @@
+<Application x:Class="LiquidCast.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+  <Application.Resources>
+    <Color x:Key="Ink">#F4F7FF</Color>
+    <Color x:Key="Muted">#94A0BC</Color>
+    <Color x:Key="Glass">#281F3B55</Color>
+    <Color x:Key="Stroke">#4DFFFFFF</Color>
+    <Color x:Key="Blue">#679CFF</Color>
+    <Color x:Key="Violet">#A675FF</Color>
+    <SolidColorBrush x:Key="InkBrush" Color="{StaticResource Ink}"/>
+    <SolidColorBrush x:Key="MutedBrush" Color="{StaticResource Muted}"/>
+    <SolidColorBrush x:Key="GlassBrush" Color="{StaticResource Glass}"/>
+    <SolidColorBrush x:Key="StrokeBrush" Color="{StaticResource Stroke}"/>
+    <Style TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource InkBrush}"/>
+      <Setter Property="FontFamily" Value="Segoe UI"/>
+    </Style>
+    <Style TargetType="Button">
+      <Setter Property="Foreground" Value="{StaticResource InkBrush}"/>
+      <Setter Property="Background" Value="#20FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#35FFFFFF"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="14,8"/>
+      <Setter Property="Margin" Value="4"/>
+    </Style>
+  </Application.Resources>
+</Application>
